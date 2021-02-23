@@ -1,1 +1,1 @@
-# Human-Activity-Recognition
+# Similarity Search
