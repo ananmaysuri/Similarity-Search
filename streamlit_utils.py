@@ -20,7 +20,7 @@ def getImagesFromUnsplash(total: int, query_text: str):
     imgs_total = total
     query = query_text
     UPSPLASH_API_KEY = "8_cSFjMpnN14fMUOZF_UJG0RsM9Y7s4dtVfBgCx5_rk"
-    url = f"<https://api.unsplash.com/search/photos?query={query_text}&page={num_page}&per_page={imgs_total}>"
+    url = f"https://api.unsplash.com/search/photos?query={query_text}&page={num_page}&per_page={imgs_total}"
     headers = {
         "Authorization": f"Bearer Client-ID {UPSPLASH_API_KEY}",
     }
