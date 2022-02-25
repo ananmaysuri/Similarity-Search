@@ -6,7 +6,7 @@ st.set_page_config(
     page_title = 'Similarity Search',
     page_icon = '🔍'
 )
-st.header("Similarity Search - Research Day Testing")
+st.header("Similarity Search - Major Project Testing")
 imageText = st.text_input("Input Query Text")
 N = st.text_input("Input Number of Results to be Displayed")
 if imageText:
