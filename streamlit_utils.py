@@ -25,7 +25,7 @@ def getImagesFromGoogle(page: int, query_text: str):
     #regUrls = [r['original'] for r in resp['images_results']]
     search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num, "api_key": key})
     for image_result in search.get_dict()['images_results']:
-        link = image_result["original"]
+        link = image_result["thumbnail"]
         regUrls.append(link)
     print(regUrls)
     return regUrls
