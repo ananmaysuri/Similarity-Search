@@ -17,7 +17,8 @@ def getImagesFromGoogle(page: int, query_text: str):
     num = page
     query = query_text
     regUrls = []
-    search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num})
+    key = "fa73b872d5ec6f0d2fec1c34e69bfde679d64ded1c534ec4fd5ee3feed5a184a"
+    search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num, "api_key": key})
     for image_result in search.get_dict()['images_results']:
         link = image_result["original"]
         regUrls.append(link)
