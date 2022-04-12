@@ -8,9 +8,21 @@ import random
 import requests
 import numpy as np
 import streamlit as st
+from serpapi import GoogleSearch
 global model, preprocess, device
 device = 'cpu'
 model, preprocess = clip.load("ViT-B/32", device = 'cpu')
+
+def getImagesFromGoogle(total: int, query_text: str):
+    num_page = 1
+    imgs_total = total
+    query = query_text
+    regUrls = []
+    search = GoogleSearch({"q": query, "tbm": "isch", "num": imgs_total})
+    for image_result in search.get_dict()['images_results']:
+        link = image_result["original"]
+        regUrls.append(link)
+    return regUrls
 
 def getImagesFromUnsplash(total: int, query_text: str):
     '''
