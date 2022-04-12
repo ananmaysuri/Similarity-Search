@@ -1,7 +1,7 @@
 import torch
 import clip
 from PIL import Image
-import cStringIO
+from io import StringIO
 import os
 import re
 from tqdm import tqdm, trange
@@ -9,6 +9,7 @@ import random
 import requests
 import numpy as np
 import streamlit as st
+import urllib2
 from serpapi import GoogleSearch
 global model, preprocess, device
 device = 'cpu'
@@ -44,6 +45,7 @@ def getImagesFromUnsplash(total: int, query_text: str):
     req = requests.get(url, headers = headers)
     resp = req.json()
     regUrls = [r['urls']['regular'] for r in resp['results']]
+    print(regUrls)
     return regUrls
 
 def linkToImage(link):
@@ -52,7 +54,7 @@ def linkToImage(link):
     '''
     #content = requests.get(link, stream = True)
     #content = content.raw
-    file = cStringIO.StringIO(urllib.urlopen(link).read())
+    file = StringIO(urllib2.urlopen(link).read())
     img = Image.open(file)
     return img
 
