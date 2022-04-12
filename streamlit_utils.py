@@ -1,15 +1,14 @@
 import torch
 import clip
 from PIL import Image
-from io import StringIO
 import os
 import re
 from tqdm import tqdm, trange
 import random
 import requests
+from io import BytesIO
 import numpy as np
 import streamlit as st
-import urllib2
 from serpapi import GoogleSearch
 global model, preprocess, device
 device = 'cpu'
@@ -20,14 +19,15 @@ def getImagesFromGoogle(page: int, query_text: str):
     query = query_text
     regUrls = []
     key = "fa73b872d5ec6f0d2fec1c34e69bfde679d64ded1c534ec4fd5ee3feed5a184a"
-    url = f"https://serpapi.com/search.json?q={query}&tbm=isch&ijn={num}&api_key={key}"
-    req = requests.get(url)
-    resp = req.json()
-    regUrls = [r['original'] for r in resp['images_results']]
-    #search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num, "api_key": key})
-    #for image_result in search.get_dict()['images_results']:
-        #link = image_result["original"]
-        #regUrls.append(link)
+    #url = f"https://serpapi.com/search.json?q={query}&tbm=isch&ijn={num}&api_key={key}"
+    #req = requests.get(url)
+    #resp = req.json()
+    #regUrls = [r['original'] for r in resp['images_results']]
+    search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num, "api_key": key})
+    for image_result in search.get_dict()['images_results']:
+        link = image_result["original"]
+        regUrls.append(link)
+    print(regUrls)
     return regUrls
 
 def getImagesFromUnsplash(total: int, query_text: str):
@@ -45,17 +45,15 @@ def getImagesFromUnsplash(total: int, query_text: str):
     req = requests.get(url, headers = headers)
     resp = req.json()
     regUrls = [r['urls']['regular'] for r in resp['results']]
-    print(regUrls)
     return regUrls
 
 def linkToImage(link):
     '''
     Image URL to PIL.Image
     '''
-    #content = requests.get(link, stream = True)
-    #content = content.raw
-    file = StringIO(urllib2.urlopen(link).read())
-    img = Image.open(file)
+    content = requests.get(link, stream = True)
+    content = content.raw
+    img = Image.open(content)
     return img
 
 @st.cache(show_spinner=False)
