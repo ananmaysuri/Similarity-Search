@@ -15,7 +15,6 @@ model, preprocess = clip.load("ViT-B/32", device = 'cpu')
 
 def getImagesFromGoogle(page: int, query_text: str):
     num = page
-    imgs_total = total
     query = query_text
     regUrls = []
     search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num})
