@@ -18,10 +18,14 @@ def getImagesFromGoogle(page: int, query_text: str):
     query = query_text
     regUrls = []
     key = "fa73b872d5ec6f0d2fec1c34e69bfde679d64ded1c534ec4fd5ee3feed5a184a"
-    search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num, "api_key": key})
-    for image_result in search.get_dict()['images_results']:
-        link = image_result["original"]
-        regUrls.append(link)
+    url = f"https://serpapi.com/search.json?q={query}&tbm=isch&ijn={num}&api_key={key}"
+    req = requests.get(url)
+    resp = req.json()
+    regUrls = [r['urls']['regular'] for r in resp['results']]
+    #search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num, "api_key": key})
+    #for image_result in search.get_dict()['images_results']:
+        #link = image_result["original"]
+        #regUrls.append(link)
     return regUrls
 
 def getImagesFromUnsplash(total: int, query_text: str):
