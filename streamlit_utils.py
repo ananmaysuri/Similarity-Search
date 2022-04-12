@@ -21,7 +21,7 @@ def getImagesFromGoogle(page: int, query_text: str):
     url = f"https://serpapi.com/search.json?q={query}&tbm=isch&ijn={num}&api_key={key}"
     req = requests.get(url)
     resp = req.json()
-    regUrls = [r['urls']['regular'] for r in resp['results']]
+    regUrls = [r['original'] for r in resp['images_results']]
     #search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num, "api_key": key})
     #for image_result in search.get_dict()['images_results']:
         #link = image_result["original"]
