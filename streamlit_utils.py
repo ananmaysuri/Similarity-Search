@@ -1,6 +1,7 @@
 import torch
 import clip
 from PIL import Image
+import cStringIO
 import os
 import re
 from tqdm import tqdm, trange
@@ -49,9 +50,10 @@ def linkToImage(link):
     '''
     Image URL to PIL.Image
     '''
-    content = requests.get(link, stream = True)
-    content = content.raw
-    img = Image.open(content)
+    #content = requests.get(link, stream = True)
+    #content = content.raw
+    file = cStringIO.StringIO(urllib.urlopen(link).read())
+    img = Image.open(file)
     return img
 
 @st.cache(show_spinner=False)
