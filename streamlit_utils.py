@@ -13,12 +13,12 @@ global model, preprocess, device
 device = 'cpu'
 model, preprocess = clip.load("ViT-B/32", device = 'cpu')
 
-def getImagesFromGoogle(total: int, query_text: str):
-    num_page = 1
+def getImagesFromGoogle(page: int, query_text: str):
+    num = page
     imgs_total = total
     query = query_text
     regUrls = []
-    search = GoogleSearch({"q": query, "tbm": "isch", "num": imgs_total})
+    search = GoogleSearch({"q": query, "tbm": "isch", "ijn": num})
     for image_result in search.get_dict()['images_results']:
         link = image_result["original"]
         regUrls.append(link)
