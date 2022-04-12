@@ -8,7 +8,7 @@ st.set_page_config(
 )
 st.header("Similarity Search - Major Project Testing")
 imageText = st.text_input("Input Query Text")
-N = st.text_input("Input Number of Results to be Displayed")
+N = st.text_input("Input Page Number")
 if imageText:
     with st.spinner(text = 'Getting Images from Unsplash and Sorting with CLIP ...'):
         
