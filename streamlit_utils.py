@@ -71,7 +71,7 @@ def getSortedQuery(text, N):
     Get images from text and sort
     using similarity score
     '''
-    upSplashImages = getImagesFromUnsplash(N, text)
+    upSplashImages = getImagesFromGoogle(N, text)
     
     imgSimScore = []
     for ix, img in enumerate(tqdm(upSplashImages)):
