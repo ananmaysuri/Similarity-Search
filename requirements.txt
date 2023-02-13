@@ -1,7 +1,7 @@
 tqdm==4.56.0
 git+https://github.com/openai/CLIP.git
 requests==2.25.1
-streamlit==0.74.1
+streamlit
 torch==1.7.1
 numpy==1.3.0
 Pillow==8.1.0
